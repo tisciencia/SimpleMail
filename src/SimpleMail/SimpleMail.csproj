@@ -40,12 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Mail\FluentMailMessage.cs" />
-    <Compile Include="Mail\IMail.cs" />
-    <Compile Include="Mail\IMailBuilder.cs" />
-    <Compile Include="Mail\MailFactory.cs" />
-    <Compile Include="Mail\MailMessage.cs" />
+    <Compile Include="Mails\FluentMail.cs" />
+    <Compile Include="Mails\IMail.cs" />
+    <Compile Include="Mails\IMailBuilder.cs" />
+    <Compile Include="Mails\MailFactory.cs" />
+    <Compile Include="Mails\Mail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transport\MailTransportConfiguration.cs" />
+    <Compile Include="Transport\PostalService.cs" />
+    <Compile Include="Validation\MailAddressValidator.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

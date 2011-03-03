@@ -2,64 +2,67 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using SimpleMail.Validation;
 
-namespace SimpleMail.Mail
+namespace SimpleMail.Mails
 {
-    public class FluentMailMessage : IMailBuilder
+    public class FluentMail : IMailBuilder
     {
-        public IMail Mail { get; set; }
-        
+        private IMail _Mail;
         public IMailBuilder From(string address)
         {
-            this.Mail.FromAddress = address;
+            this._Mail.FromAddress = address;
             return this;
         }
         public IMailBuilder To(params string[] addresses)
         {
             for (int i = 0; i < addresses.Length; i++)
-            {
-                this.Mail.ToAddresses.Add(addresses[i]);
-            }
+                this._Mail.ToAddresses.Add(addresses[i]);
+
             return this;
         }
         public IMailBuilder Cc(params string[] addresses)
         {
             for (int i = 0; i < addresses.Length; i++)
-            {
-                this.Mail.CcAddresses.Add(addresses[i]);
-            }
+                this._Mail.CcAddresses.Add(addresses[i]);
+
             return this;
         }
         public IMailBuilder Bcc(params string[] addresses)
         {
             for (int i = 0; i < addresses.Length; i++)
-            {
-                this.Mail.BccAddresses.Add(addresses[i]);
-            }
+                this._Mail.BccAddresses.Add(addresses[i]);
+
             return this;
         }
         public IMailBuilder WithSubject(string subject)
         {
-            this.Mail.Subject = subject;
+            this._Mail.Subject = subject;
             return this;
         }
         public IMailBuilder WithBody(string body)
         {
-            this.Mail.Body = body;
+            this._Mail.Body = body;
             return this;
         }
         public IMailBuilder WithAttachment(params string[] attachments)
         {
             for (int i = 0; i < attachments.Length; i++)
             {
-                this.Mail.Attachments.Add(attachments[i]);
+                this._Mail.Attachments.Add(attachments[i]);
             }
             return this;
         }
 
-        public FluentMailMessage()
+        public IMail Builder()
         {
-            Mail = new MailMessage();
+            _Mail.Validate();
+            return _Mail;
+        }
+
+        public FluentMail()
+        {
+            _Mail = new Mail();
         }
     }
 }

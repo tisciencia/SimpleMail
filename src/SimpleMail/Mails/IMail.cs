@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace SimpleMail.Mail
+namespace SimpleMail.Mails
 {
     public interface IMail
     {
@@ -14,5 +14,6 @@ namespace SimpleMail.Mail
         ICollection<string> Attachments { get; set; }
         string Subject { get; set; }
         string Body { get; set; }
+        void Validate();
     }
 }

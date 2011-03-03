@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using SharpTestsEx;
-using SimpleMail.Mail;
+using SimpleMail.Mails;
+using SimpleMail.Transport;
 
 namespace SimpleMail.Test
 {
@@ -14,7 +15,7 @@ namespace SimpleMail.Test
         [Test]
         public void FieldsMailMessageTest()
         {
-            var newMessage = MailFactory.CreateNewFluentMailMessage()
+            var mail = PostalService.NewFluentMail()
                 .From("from")
                 .To("to")
                 .To("to 2")
@@ -25,19 +26,20 @@ namespace SimpleMail.Test
                 .WithSubject("subject")
                 .WithAttachment("attachment 1")
                 .WithAttachment("attachment 2")
-                .WithBody("body");
-
-            newMessage.Mail.FromAddress.Should().Be("from");
-            newMessage.Mail.ToAddresses.Should().Contain("to");
-            newMessage.Mail.ToAddresses.Should().Contain("to 2");
-            newMessage.Mail.CcAddresses.Should().Contain("cc 1");
-            newMessage.Mail.CcAddresses.Should().Contain("cc 2");
-            newMessage.Mail.BccAddresses.Should().Contain("bcc 1");
-            newMessage.Mail.BccAddresses.Should().Contain("bcc 2");
-            newMessage.Mail.Attachments.Should().Contain("attachment 1");
-            newMessage.Mail.Attachments.Should().Contain("attachment 2");
-            newMessage.Mail.Body.Should().Be("body");
-            newMessage.Mail.Subject.Should().Be("subject");
+                .WithBody("body")
+                .Builder();
+            
+            mail.FromAddress.Should().Be("from");
+            mail.ToAddresses.Should().Contain("to");
+            mail.ToAddresses.Should().Contain("to 2");
+            mail.CcAddresses.Should().Contain("cc 1");
+            mail.CcAddresses.Should().Contain("cc 2");
+            mail.BccAddresses.Should().Contain("bcc 1");
+            mail.BccAddresses.Should().Contain("bcc 2");
+            mail.Attachments.Should().Contain("attachment 1");
+            mail.Attachments.Should().Contain("attachment 2");
+            mail.Body.Should().Be("body");
+            mail.Subject.Should().Be("subject");
         }
 
         [Test]
