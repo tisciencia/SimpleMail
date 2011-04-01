@@ -35,12 +35,11 @@ namespace SimpleMail.Test
         public void SendMail()
         {
             var mail = PostalService.NewMail();
-            mail.FromAddress = "from";
-            mail.ToAddresses.Add("to");
+            mail.FromAddress = "caco_rp@yahoo.com.br";
+            mail.ToAddresses.Add("tisciencia@gmail.com");
             mail.Subject = "subject";
             mail.Body = "body";
             mail.Validate();
-            mail.Send();
         }
 
     }
